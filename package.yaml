@@ -1,0 +1,79 @@
+name:                hearts
+version:             0.1.0.0
+github:              "githubuser/hearts"
+license:             BSD3
+author:              "Tim Dwyer and Arthur Maheo"
+maintainer:          "example@example.com"
+copyright:           "2018 Tim Dwyer and Arthur Maheo"
+
+extra-source-files:
+- README.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on Github at <https://github.com/githubuser/hearts#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- random
+- mtl
+- cassava
+- bytestring
+- vector
+- time
+- filepath
+- directory
+- utility-ht
+- containers
+- deepseq
+
+library:
+  source-dirs: src
+  default-extensions:
+  - Trustworthy
+  - NamedFieldPuns
+  - DuplicateRecordFields
+
+executables:
+  staticgame:
+    main: Main.hs
+    source-dirs: staticgame
+    ghc-options:
+    - -Wall
+    - -Wno-trustworthy-safe
+    - -Wno-orphans
+    - -Wno-unused-imports
+    dependencies:
+    - hearts
+    default-extensions:
+    - Trustworthy
+    - NamedFieldPuns
+    - DuplicateRecordFields
+
+tests:
+  hearts-test:
+    main:                Spec.hs
+    source-dirs:
+      - test
+      - staticgame
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -Wall
+    - -Werror
+    - -Wtrustworthy-safe
+    - -Wno-unused-imports
+    - -Wno-orphans
+    dependencies:
+    - hearts
+    - QuickCheck
+    default-extensions:
+    - Safe
+    - NamedFieldPuns
+    - DuplicateRecordFields
